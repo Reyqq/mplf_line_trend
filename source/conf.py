@@ -38,6 +38,9 @@ extensions = [
 autosectionlabel_prefix_document = True
 source_encoding = 'utf-8-sig'
 autodoc_member_order = 'bysource'
+napoleon_google_docstring = True
+napoleon_numpy_docstring = True
+
 
 templates_path = ['_templates']
 exclude_patterns = []
