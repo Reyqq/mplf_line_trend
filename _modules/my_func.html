@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Обзор: исходный код модуля &#8212; документация mplfinance 1.0</title>
+    <title>my_func &#8212; документация mplfinance 1.0</title>
   
   
   
@@ -44,7 +44,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/translations.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/index';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/my_func';</script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -340,7 +340,10 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">Обзор:...</li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Код модуля</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">my_func</li>
   </ul>
 </nav>
 </div>
@@ -357,9 +360,66 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <h1>Все модули, в которых есть код</h1>
-<ul><li><a href="my_func.html">my_func</a></li>
-</ul>
+  <h1>Исходный код my_func</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">mplfinance</span> <span class="k">as</span> <span class="nn">mpf</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="extract_datetime_components"><a class="viewcode-back" href="../api_reference/mplfinance_func1.html#my_func.extract_datetime_components">[документация]</a><span class="k">def</span> <span class="nf">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    </span>
+<span class="sd">    Преобразует столбец &#39;timestamp&#39;, извлекает компоненты даты и времени и устанавливает &#39;timestamp&#39; в качестве индекса.</span>
+
+<span class="sd">    Эта функция выполняет следующие операции:</span>
+<span class="sd">    1. Преобразует столбец &#39;timestamp&#39; в формат datetime.</span>
+<span class="sd">    2. Извлекает дату и время из &#39;timestamp&#39; в отдельные столбцы.</span>
+<span class="sd">    3. Устанавливает &#39;timestamp&#39; в качестве индекса датафрейма.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): Исходный датафрейм с столбцом &#39;timestamp&#39;.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Обновленный датафрейм с новыми столбцами &#39;date&#39; и &#39;time&#39;,</span>
+<span class="sd">                      и &#39;timestamp&#39; в качестве индекса.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        KeyError: Если в датафрейме отсутствует столбец &#39;timestamp&#39;.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; data = {&#39;timestamp&#39;: [&#39;2023-08-01 10:30:00&#39;, &#39;2023-08-01 11:45:00&#39;]}</span>
+<span class="sd">        &gt;&gt;&gt; df = pd.DataFrame(data)</span>
+<span class="sd">        &gt;&gt;&gt; result = extract_datetime_components(df)</span>
+<span class="sd">        &gt;&gt;&gt; print(result)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Преобразование &#39;timestamp&#39; в datetime</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Извлечение даты</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
+
+    <span class="c1"># Извлечение времени</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">time</span>
+
+    <span class="c1"># Преобразование &#39;date&#39; обратно в datetime для унификации типов</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Установка &#39;timestamp&#39; в качестве индекса</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span></div>
+</pre></div>
 
                 </article>
               

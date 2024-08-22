@@ -2,7 +2,7 @@
 Модуль mplfinance
 =================
 
-.. automodule:: mplfinance_func
+.. automodule:: my_func
    :members:
    :undoc-members:
    :show-inheritance:
