@@ -1,6 +1,5 @@
 import os
 import sys
-import bokeh
 import pandas
 import numpy
 import typing
