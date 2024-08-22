@@ -1,1 +1,0 @@
-# mplfinance_line_trend
