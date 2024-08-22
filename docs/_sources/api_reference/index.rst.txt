@@ -8,4 +8,4 @@
    :maxdepth: 3
 
    functions_overview
-   mplfinance_func
+   mplfinance_func1
