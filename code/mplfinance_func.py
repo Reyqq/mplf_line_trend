@@ -14,6 +14,8 @@ np.seterr(divide='ignore', invalid='ignore')
 
 def extract_datetime_components(df: pd.DataFrame) -> pd.DataFrame:
     """
+
+    
     Преобразует столбец 'timestamp', извлекает компоненты даты и времени и устанавливает 'timestamp' в качестве индекса.
 
     Эта функция выполняет следующие операции:
