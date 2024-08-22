@@ -25,6 +25,7 @@ Welcome to mplfinance's documentation!
 
    introduction
    api_reference/index
+   func1
 
 
 Indices and tables
