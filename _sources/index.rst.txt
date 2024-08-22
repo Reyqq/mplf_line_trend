@@ -3,13 +3,28 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+======================================
 Welcome to mplfinance's documentation!
 ======================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+.. warning::
+   This library is under heavy development.
 
+
+
+
+Содержание
+----------
+
+.. toctree::
+   :maxdepth: 4
+   :titlesonly:
+   :numbered:
+   :hidden:
+   :caption: Основные разделы:
+
+   introduction
+   api_reference/index
 
 
 Indices and tables
