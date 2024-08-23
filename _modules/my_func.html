@@ -390,49 +390,49 @@ document.write(`
 
 
 <div class="viewcode-block" id="extract_datetime_components"><a class="viewcode-back" href="../func1.html#my_func.extract_datetime_components">[документация]</a><span class="k">def</span> <span class="nf">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    .. :no-index:</span>
-<span class="sd">    </span>
-<span class="sd">    Преобразует столбец &#39;timestamp&#39;, извлекает компоненты даты и времени и устанавливает &#39;timestamp&#39; в качестве индекса.</span>
+<span class="w">      </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      .. :no-index:</span>
+<span class="sd">      </span>
+<span class="sd">      Преобразует столбец &#39;timestamp&#39;, извлекает компоненты даты и времени и устанавливает &#39;timestamp&#39; в качестве индекса.</span>
 
-<span class="sd">    Эта функция выполняет следующие операции:</span>
-<span class="sd">    1. Преобразует столбец &#39;timestamp&#39; в формат datetime.</span>
-<span class="sd">    2. Извлекает дату и время из &#39;timestamp&#39; в отдельные столбцы.</span>
-<span class="sd">    3. Устанавливает &#39;timestamp&#39; в качестве индекса датафрейма.</span>
+<span class="sd">      Эта функция выполняет следующие операции:</span>
+<span class="sd">      1. Преобразует столбец &#39;timestamp&#39; в формат datetime.</span>
+<span class="sd">      2. Извлекает дату и время из &#39;timestamp&#39; в отдельные столбцы.</span>
+<span class="sd">      3. Устанавливает &#39;timestamp&#39; в качестве индекса датафрейма.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        df (pd.DataFrame): Исходный датафрейм с столбцом &#39;timestamp&#39;.</span>
+<span class="sd">      Args:</span>
+<span class="sd">          df (pd.DataFrame): Исходный датафрейм с столбцом &#39;timestamp&#39;.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        pd.DataFrame: Обновленный датафрейм с новыми столбцами &#39;date&#39; и &#39;time&#39;,</span>
-<span class="sd">                      и &#39;timestamp&#39; в качестве индекса.</span>
+<span class="sd">      Returns:</span>
+<span class="sd">          pd.DataFrame: Обновленный датафрейм с новыми столбцами &#39;date&#39; и &#39;time&#39;,</span>
+<span class="sd">                        и &#39;timestamp&#39; в качестве индекса.</span>
 
-<span class="sd">    Raises:</span>
-<span class="sd">        KeyError: Если в датафрейме отсутствует столбец &#39;timestamp&#39;.</span>
+<span class="sd">      Raises:</span>
+<span class="sd">          KeyError: Если в датафрейме отсутствует столбец &#39;timestamp&#39;.</span>
 
-<span class="sd">    Example:</span>
-<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
-<span class="sd">        &gt;&gt;&gt; data = {&#39;timestamp&#39;: [&#39;2023-08-01 10:30:00&#39;, &#39;2023-08-01 11:45:00&#39;]}</span>
-<span class="sd">        &gt;&gt;&gt; df = pd.DataFrame(data)</span>
-<span class="sd">        &gt;&gt;&gt; result = extract_datetime_components(df)</span>
-<span class="sd">        &gt;&gt;&gt; print(result)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Преобразование &#39;timestamp&#39; в datetime</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+<span class="sd">      Example:</span>
+<span class="sd">          &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">          &gt;&gt;&gt; data = {&#39;timestamp&#39;: [&#39;2023-08-01 10:30:00&#39;, &#39;2023-08-01 11:45:00&#39;]}</span>
+<span class="sd">          &gt;&gt;&gt; df = pd.DataFrame(data)</span>
+<span class="sd">          &gt;&gt;&gt; result = extract_datetime_components(df)</span>
+<span class="sd">          &gt;&gt;&gt; print(result)</span>
+<span class="sd">      &quot;&quot;&quot;</span>
+      <span class="c1"># Преобразование &#39;timestamp&#39; в datetime</span>
+      <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
 
-    <span class="c1"># Извлечение даты</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
+      <span class="c1"># Извлечение даты</span>
+      <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
 
-    <span class="c1"># Извлечение времени</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">time</span>
+      <span class="c1"># Извлечение времени</span>
+      <span class="n">df</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">time</span>
 
-    <span class="c1"># Преобразование &#39;date&#39; обратно в datetime для унификации типов</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
+      <span class="c1"># Преобразование &#39;date&#39; обратно в datetime для унификации типов</span>
+      <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">])</span>
 
-    <span class="c1"># Установка &#39;timestamp&#39; в качестве индекса</span>
-    <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+      <span class="c1"># Установка &#39;timestamp&#39; в качестве индекса</span>
+      <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">df</span></div>
+      <span class="k">return</span> <span class="n">df</span></div>
 </pre></div>
 
                 </article>
