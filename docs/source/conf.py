@@ -28,7 +28,6 @@ release = '1.0'
 
 
 
-import pydata_sphinx_theme
 
 extensions = [
     'sphinx.ext.autodoc',
