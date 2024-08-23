@@ -1,10 +1,18 @@
 import os
 import sys
-import pandas
-import numpy
-import typing
-import mplfinance
+import subprocess
+
+def install_dependencies():
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
+    requirements_path = os.path.join(project_root, 'requirements.txt')
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", requirements_path])
+
+install_dependencies()
+
+sys.path.insert(0, os.path.abspath('../..'))
 sys.path.insert(0, os.path.abspath('../../code'))
+
 
 
 
