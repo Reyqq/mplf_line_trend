@@ -15,6 +15,8 @@ jobs:
       - name: Install dependencies
         run: |
           pip install sphinx sphinx_rtd_theme  mplfinance sphinx-copybutton pydata_sphinx_theme
+          pip install -r requirements.txt
+        
       - name: Sphinx build
         run: |
           python -m sphinx docs/source docs/
