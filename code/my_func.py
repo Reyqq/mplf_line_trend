@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import mplfinance as mpf
-import pandas as pd
 from typing import Dict, List, Tuple, Union, Callable, Optional
 from tqdm.notebook import tqdm
 import logging

@@ -155,13 +155,6 @@
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../func1.html">
-    mplfinance_func module
-  </a>
-</li>
-
   </ul>
 </nav></div>
       
@@ -273,13 +266,6 @@ document.write(`
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../func1.html">
-    mplfinance_func module
-  </a>
-</li>
-
   </ul>
 </nav></div>
           
@@ -379,7 +365,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">mplfinance</span> <span class="k">as</span> <span class="nn">mpf</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">import</span> <span class="nn">logging</span>
@@ -389,7 +374,7 @@ document.write(`
 
 
 
-<div class="viewcode-block" id="extract_datetime_components"><a class="viewcode-back" href="../func1.html#my_func.extract_datetime_components">[документация]</a><span class="k">def</span> <span class="nf">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="extract_datetime_components"><a class="viewcode-back" href="../api_reference/mplfinance_func1.html#my_func.extract_datetime_components">[документация]</a><span class="k">def</span> <span class="nf">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">      </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">      </span>
 <span class="sd">      Преобразует столбец &#39;timestamp&#39;, извлекает компоненты даты и времени и устанавливает &#39;timestamp&#39; в качестве индекса.</span>
