@@ -45,7 +45,6 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/mplfinance_func1';</script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
-    <link rel="next" title="3. mplfinance_func module" href="../func1.html" />
     <link rel="prev" title="2.1. Обзор функций" href="functions_overview.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ru"/>
@@ -152,13 +151,6 @@
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
     Справочник API
-  </a>
-</li>
-
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../func1.html">
-    mplfinance_func module
   </a>
 </li>
 
@@ -275,13 +267,6 @@ document.write(`
   </a>
 </li>
 
-
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="../func1.html">
-    mplfinance_func module
-  </a>
-</li>
-
   </ul>
 </nav></div>
           
@@ -389,8 +374,44 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mplfinance">
-<h1><span class="section-number">2.2. </span>Модуль mplfinance<a class="headerlink" href="#mplfinance" title="Ссылка на этот заголовок">#</a></h1>
+  <section id="module-my_func">
+<span id="mplfinance"></span><h1><span class="section-number">2.2. </span>Модуль mplfinance<a class="headerlink" href="#module-my_func" title="Ссылка на этот заголовок">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.extract_datetime_components">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">extract_datetime_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/my_func.html#extract_datetime_components"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.extract_datetime_components" title="Link to this definition">#</a></dt>
+<dd><p>Преобразует столбец „timestamp“, извлекает компоненты даты и времени и устанавливает „timestamp“ в качестве индекса.</p>
+<p>Эта функция выполняет следующие операции:
+1. Преобразует столбец „timestamp“ в формат datetime.
+2. Извлекает дату и время из „timestamp“ в отдельные столбцы.
+3. Устанавливает „timestamp“ в качестве индекса датафрейма.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – Исходный датафрейм с столбцом „timestamp“.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Обновленный датафрейм с новыми столбцами „date“ и „time“,</dt><dd><p>и „timestamp“ в качестве индекса.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – Если в датафрейме отсутствует столбец „timestamp“.</p>
+</dd>
+</dl>
+<p class="rubric">Пример</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2023-08-01 10:30:00&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-08-01 11:45:00&#39;</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <p>Этот раздел содержит подробное описание всех функций, реализованных в проекте.</p>
 </section>
 
@@ -413,15 +434,6 @@ document.write(`
         <p class="prev-next-title"><span class="section-number">2.1. </span>Обзор функций</p>
       </div>
     </a>
-    <a class="right-next"
-       href="../func1.html"
-       title="следующая страница">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">вперёд</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>mplfinance_func module</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -431,6 +443,18 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> На этой странице
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my_func.extract_datetime_components"><code class="docutils literal notranslate"><span class="pre">extract_datetime_components()</span></code></a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="ru" data-content_root="./" >
+<html lang="ru" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>3. mplfinance_func module &#8212; документация mplfinance 1.0</title>
   
@@ -28,20 +29,22 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="_static/documentation_options.js?v=9ca2116e"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/translations.js?v=9bfe3ffa"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/translations.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'func1';</script>
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
@@ -381,8 +384,44 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="mplfinance-func-module">
-<h1><span class="section-number">3. </span>mplfinance_func module<a class="headerlink" href="#mplfinance-func-module" title="Ссылка на этот заголовок">#</a></h1>
+  <section id="module-my_func">
+<span id="mplfinance-func-module"></span><h1><span class="section-number">3. </span>mplfinance_func module<a class="headerlink" href="#module-my_func" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.extract_datetime_components">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">extract_datetime_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="_modules/my_func.html#extract_datetime_components"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.extract_datetime_components" title="Ссылка на это определение">#</a></dt>
+<dd><p>Преобразует столбец „timestamp“, извлекает компоненты даты и времени и устанавливает „timestamp“ в качестве индекса.</p>
+<p>Эта функция выполняет следующие операции:
+1. Преобразует столбец „timestamp“ в формат datetime.
+2. Извлекает дату и время из „timestamp“ в отдельные столбцы.
+3. Устанавливает „timestamp“ в качестве индекса датафрейма.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – Исходный датафрейм с столбцом „timestamp“.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Обновленный датафрейм с новыми столбцами „date“ и „time“,</dt><dd><p>и „timestamp“ в качестве индекса.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – Если в датафрейме отсутствует столбец „timestamp“.</p>
+</dd>
+</dl>
+<p class="rubric">Пример</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2023-08-01 10:30:00&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-08-01 11:45:00&#39;</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -479,7 +518,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Создано с помощью <a href=\"https://www.sphinx-doc.org/\">Sphinx</a> 7.4.7.
+    Создано с помощью <a href=\"https://www.sphinx-doc.org/\">Sphinx</a> 5.0.2.
     <br/>
   </p>
 </div>
