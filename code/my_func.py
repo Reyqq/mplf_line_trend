@@ -91,3 +91,123 @@ def set_plt_params(fontsize: float = 9.0, linewidth: float = 1.0, figsize: tuple
     plt.rc("grid", color="#2a2e39", linestyle="dashed")
     plt.rc("legend", handleheight=1, handlelength=2, fontsize=fontsize)
     plt.rc("text", color="#b2b5be")
+
+
+
+
+
+
+
+def plot_candlestick_with_lines(
+    df: pd.DataFrame,
+    start_index: int = 0,
+    end_index: Optional[int] = None,
+    chart_title: Optional[str] = None,
+    ylabel: Optional[str] = None,
+    xlabel: Optional[str] = None,
+    title_fontsize: int = 18,
+    label_color: str = "#b2b5be",
+    line_data: Optional[pd.Series] = None,
+    line_processor: Optional[Callable[[dict], list]] = None,
+    trendline_dict: Optional[dict] = None
+) -> None:
+    """
+    Отображает свечной график с дополнительными линиями.
+
+    Эта функция создает свечной график на основе предоставленных данных и добавляет
+    дополнительные линии тренда и другие визуальные элементы.
+
+    Args:
+        df (pd.DataFrame): Датафрейм с данными для графика. Должен содержать столбцы
+            'Open', 'High', 'Low', 'Close' для построения свечей.
+        start_index (int, optional): Начальный индекс данных в датафрейме для отображения
+            на графике. По умолчанию 0.
+        end_index (int, optional): Конечный индекс данных в датафрейме для отображения
+            на графике. По умолчанию None (до конца датафрейма).
+        chart_title (str, optional): Заголовок графика. По умолчанию None.
+        ylabel (str, optional): Название оси Y. По умолчанию None.
+        xlabel (str, optional): Название оси X. По умолчанию None.
+        title_fontsize (int, optional): Размер шрифта заголовка. По умолчанию 18.
+        label_color (str, optional): Цвет текста названий осей и заголовка.
+            По умолчанию "#b2b5be".
+        line_data (pd.Series, optional): Данные для отображения дополнительной линии
+            на графике. По умолчанию None.
+        line_processor (Callable[[dict], list], optional): Функция для обработки линий.
+            По умолчанию None.
+        trendline_dict (dict, optional): Словарь с данными для линий, который будет
+            обработан функцией line_processor. По умолчанию None.
+
+    Raises:
+        ValueError: Если trendline_dict не определен или не найдено подходящих линий.
+
+    Returns:
+        None: Функция отображает график, но не возвращает значение.
+
+    Example:
+        >>> import pandas as pd
+        >>> df = pd.DataFrame({
+        ...     'Open': [10, 11, 12],
+        ...     'High': [12, 13, 14],
+        ...     'Low': [9, 10, 11],
+        ...     'Close': [11, 12, 13]
+        ... })
+        >>> plot_candlestick_with_lines(df, chart_title="Пример графика")
+
+    Note:
+        Эта функция использует библиотеки matplotlib и mplfinance для создания графика.
+        Убедитесь, что эти библиотеки установлены перед использованием функции.
+    """
+    if trendline_dict is None:
+        raise ValueError("trendline_dict не определён. Пожалуйста, предоставьте словарь с данными для линий.")
+
+    if line_processor is None:
+        line_processor = process_trendlines(trendline_dict)
+
+    if len(line_processor) < 1:
+       raise ValueError("Не найдено подходящих линий.")
+
+    market_colors = mpf.make_marketcolors(up="#ffffff", down="#1976d2", edge="#2a2e39", wick="#787b86")
+
+    style = {
+        "xtick.labelcolor": '#b2b5be',
+        "ytick.labelcolor": '#b2b5be',
+        "xtick.color": '#2a2e39',
+        "ytick.color": '#2a2e39',
+    }
+    chart_style = mpf.make_mpf_style(facecolor="#181c27", figcolor="#181c27", edgecolor="#2a2e39", 
+                                     gridcolor="#2a2e39", gridstyle="dashed", rc=style, 
+                                     marketcolors=market_colors, y_on_right=True)
+
+    addplot = mpf.make_addplot(line_data, type='line', color='r', width=0.5)
+
+    fig, axlist = mpf.plot(df.iloc[start_index:end_index],
+                           type="candle", 
+                           alines=dict(alines=line_processor, colors='g', linewidths=0.5),
+                           ylabel="Price", 
+                           show_nontrading=True, 
+                           figratio=(25.6, 14.4), 
+                           figscale=2, 
+                           style=chart_style, 
+                           returnfig=True, 
+                           scale_padding={"top": 1.5}, 
+                           tight_layout=True, 
+                           addplot=addplot, 
+                           xrotation=0)
+
+    axlist[0].set_ylabel(ylabel if ylabel is not None else None, color=label_color)
+    axlist[0].set_xlabel(xlabel if xlabel is not None else None, color=label_color)
+
+    if chart_title:
+        fig.suptitle(chart_title, color=label_color, fontsize=title_fontsize)
+
+    plt.show()
+
+
+
+
+
+
+
+
+
+    

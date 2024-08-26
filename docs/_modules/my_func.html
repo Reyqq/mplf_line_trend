@@ -454,6 +454,126 @@ document.write(`
     <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#2a2e39&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;legend&quot;</span><span class="p">,</span> <span class="n">handleheight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">handlelength</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#b2b5be&quot;</span><span class="p">)</span></div>
+
+
+
+
+
+
+
+<div class="viewcode-block" id="plot_candlestick_with_lines"><a class="viewcode-back" href="../api_reference/mplfinance_func1.html#my_func.plot_candlestick_with_lines">[документация]</a><span class="k">def</span> <span class="nf">plot_candlestick_with_lines</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">start_index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">end_index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">chart_title</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">title_fontsize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="n">label_color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;#b2b5be&quot;</span><span class="p">,</span>
+    <span class="n">line_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">line_processor</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">dict</span><span class="p">],</span> <span class="nb">list</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">trendline_dict</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Отображает свечной график с дополнительными линиями.</span>
+
+<span class="sd">    Эта функция создает свечной график на основе предоставленных данных и добавляет</span>
+<span class="sd">    дополнительные линии тренда и другие визуальные элементы.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df (pd.DataFrame): Датафрейм с данными для графика. Должен содержать столбцы</span>
+<span class="sd">            &#39;Open&#39;, &#39;High&#39;, &#39;Low&#39;, &#39;Close&#39; для построения свечей.</span>
+<span class="sd">        start_index (int, optional): Начальный индекс данных в датафрейме для отображения</span>
+<span class="sd">            на графике. По умолчанию 0.</span>
+<span class="sd">        end_index (int, optional): Конечный индекс данных в датафрейме для отображения</span>
+<span class="sd">            на графике. По умолчанию None (до конца датафрейма).</span>
+<span class="sd">        chart_title (str, optional): Заголовок графика. По умолчанию None.</span>
+<span class="sd">        ylabel (str, optional): Название оси Y. По умолчанию None.</span>
+<span class="sd">        xlabel (str, optional): Название оси X. По умолчанию None.</span>
+<span class="sd">        title_fontsize (int, optional): Размер шрифта заголовка. По умолчанию 18.</span>
+<span class="sd">        label_color (str, optional): Цвет текста названий осей и заголовка.</span>
+<span class="sd">            По умолчанию &quot;#b2b5be&quot;.</span>
+<span class="sd">        line_data (pd.Series, optional): Данные для отображения дополнительной линии</span>
+<span class="sd">            на графике. По умолчанию None.</span>
+<span class="sd">        line_processor (Callable[[dict], list], optional): Функция для обработки линий.</span>
+<span class="sd">            По умолчанию None.</span>
+<span class="sd">        trendline_dict (dict, optional): Словарь с данными для линий, который будет</span>
+<span class="sd">            обработан функцией line_processor. По умолчанию None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: Если trendline_dict не определен или не найдено подходящих линий.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None: Функция отображает график, но не возвращает значение.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">        &gt;&gt;&gt; df = pd.DataFrame({</span>
+<span class="sd">        ...     &#39;Open&#39;: [10, 11, 12],</span>
+<span class="sd">        ...     &#39;High&#39;: [12, 13, 14],</span>
+<span class="sd">        ...     &#39;Low&#39;: [9, 10, 11],</span>
+<span class="sd">        ...     &#39;Close&#39;: [11, 12, 13]</span>
+<span class="sd">        ... })</span>
+<span class="sd">        &gt;&gt;&gt; plot_candlestick_with_lines(df, chart_title=&quot;Пример графика&quot;)</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Эта функция использует библиотеки matplotlib и mplfinance для создания графика.</span>
+<span class="sd">        Убедитесь, что эти библиотеки установлены перед использованием функции.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">trendline_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;trendline_dict не определён. Пожалуйста, предоставьте словарь с данными для линий.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">line_processor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">line_processor</span> <span class="o">=</span> <span class="n">process_trendlines</span><span class="p">(</span><span class="n">trendline_dict</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line_processor</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Не найдено подходящих линий.&quot;</span><span class="p">)</span>
+
+    <span class="n">market_colors</span> <span class="o">=</span> <span class="n">mpf</span><span class="o">.</span><span class="n">make_marketcolors</span><span class="p">(</span><span class="n">up</span><span class="o">=</span><span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span> <span class="n">down</span><span class="o">=</span><span class="s2">&quot;#1976d2&quot;</span><span class="p">,</span> <span class="n">edge</span><span class="o">=</span><span class="s2">&quot;#2a2e39&quot;</span><span class="p">,</span> <span class="n">wick</span><span class="o">=</span><span class="s2">&quot;#787b86&quot;</span><span class="p">)</span>
+
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;xtick.labelcolor&quot;</span><span class="p">:</span> <span class="s1">&#39;#b2b5be&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.labelcolor&quot;</span><span class="p">:</span> <span class="s1">&#39;#b2b5be&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.color&quot;</span><span class="p">:</span> <span class="s1">&#39;#2a2e39&#39;</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.color&quot;</span><span class="p">:</span> <span class="s1">&#39;#2a2e39&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">chart_style</span> <span class="o">=</span> <span class="n">mpf</span><span class="o">.</span><span class="n">make_mpf_style</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;#181c27&quot;</span><span class="p">,</span> <span class="n">figcolor</span><span class="o">=</span><span class="s2">&quot;#181c27&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;#2a2e39&quot;</span><span class="p">,</span> 
+                                     <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;#2a2e39&quot;</span><span class="p">,</span> <span class="n">gridstyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">rc</span><span class="o">=</span><span class="n">style</span><span class="p">,</span> 
+                                     <span class="n">marketcolors</span><span class="o">=</span><span class="n">market_colors</span><span class="p">,</span> <span class="n">y_on_right</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">addplot</span> <span class="o">=</span> <span class="n">mpf</span><span class="o">.</span><span class="n">make_addplot</span><span class="p">(</span><span class="n">line_data</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;line&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axlist</span> <span class="o">=</span> <span class="n">mpf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">],</span>
+                           <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;candle&quot;</span><span class="p">,</span> 
+                           <span class="n">alines</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">alines</span><span class="o">=</span><span class="n">line_processor</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+                           <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Price&quot;</span><span class="p">,</span> 
+                           <span class="n">show_nontrading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                           <span class="n">figratio</span><span class="o">=</span><span class="p">(</span><span class="mf">25.6</span><span class="p">,</span> <span class="mf">14.4</span><span class="p">),</span> 
+                           <span class="n">figscale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                           <span class="n">style</span><span class="o">=</span><span class="n">chart_style</span><span class="p">,</span> 
+                           <span class="n">returnfig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                           <span class="n">scale_padding</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;top&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">},</span> 
+                           <span class="n">tight_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                           <span class="n">addplot</span><span class="o">=</span><span class="n">addplot</span><span class="p">,</span> 
+                           <span class="n">xrotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">axlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span> <span class="k">if</span> <span class="n">ylabel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">label_color</span><span class="p">)</span>
+    <span class="n">axlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span> <span class="k">if</span> <span class="n">xlabel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">label_color</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">chart_title</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">chart_title</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">label_color</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">title_fontsize</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+
+
+
+
+
+
+
+    
 </pre></div>
 
                 </article>
