@@ -2,7 +2,7 @@
 
 ![Logo](docs/source/image/grafic.png)
 
-mplfinance_line_trend - это Python библиотека для создания и анализа линейных трендов на финансовых графиках с использованием mplfinance.
+**mplfinance_line_trend** - это Python библиотека для создания и анализа линейных трендов на финансовых графиках с использованием mplfinance.
 
 ## Особенности
 
