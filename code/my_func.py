@@ -374,10 +374,86 @@ def get_coefs(x0: float, x1: float, y0: float, y1: float) -> Tuple[float, float]
 
 
 
+def process_trendlines(trendline_dict: Dict[int, Dict[str, Tuple[int, int]]]) -> List[Tuple[Tuple[int, int], Tuple[int, int]]]:
+    """
+    Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.
+
+    Функция анализирует словарь `trendline_dict`, находит ключи 'p2' и 'p3', и создаёт список кортежей с парами координат.
+    Эти пары координат представляют собой начальную и конечную точки трендовых линий.
+
+    Args:
+        trendline_dict (Dict[int, Dict[str, Tuple[int, int]]]): Словарь, где ключами являются целые числа,
+            а значениями - словари с ключами 'p1', 'p2', 'p3' и значениями в виде кортежей координат (x, y).
+
+    Returns:
+        List[Tuple[Tuple[int, int], Tuple[int, int]]]: Список кортежей, где каждый кортеж содержит две пары координат (x, y),
+            соответствующие начальной и конечной точкам трендовых линий.
+
+    Examples:
+        >>> trendline_dict = {
+        ...     0: {'p1': (0, 0), 'p2': (1, 1)},
+        ...     1: {'p3': (2, 2)},
+        ...     2: {'p1': (2, 2), 'p2': (3, 3)},
+        ...     3: {'p3': (4, 4)}
+        ... }
+        >>> process_trendlines(trendline_dict)
+        [((1, 1), (2, 2)), ((3, 3), (4, 4))]
+
+    Note:
+        - Функция предполагает, что ключи в словаре `trendline_dict` начинаются с 0 и идут последовательно.
+        - Функция ищет 'p2' в предыдущем элементе и 'p3' в текущем элементе для формирования пары координат.
+    """
+    result_y = []
+    value2 = None
+
+    for item in range(1, len(trendline_dict)):
+        if 'p2' in trendline_dict[item-1]:
+            value2 = trendline_dict[item-1]['p2']
+
+        if "p3" in trendline_dict[item]:
+            value3 = trendline_dict[item]['p3']
+            if value2 is not None:
+                result_y.append((value2, value3))
+
+    # Обработка последнего элемента
+    if value2 is not None and "p3" in trendline_dict[len(trendline_dict) - 1]:
+        last_value3 = trendline_dict[len(trendline_dict) - 1]['p3']
+        result_y.append((value2, last_value3))
+
+    return result_y
 
 
 
 
 
+def check_trendline_touch(price: float, trendline_value: float, deviation: float) -> bool:
+    """
+    Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.
 
+    Эта функция определяет, попадает ли заданная цена в диапазон, образованный значением линии тренда
+    плюс-минус указанное процентное отклонение.
+
+    Args:
+        price (float): Цена закрытия свечи.
+        trendline_value (float): Значение линии тренда в момент закрытия свечи.
+        deviation (float): Допустимое отклонение от линии тренда в процентах (в десятичном формате).
+                           Например, 0.05 для 5% отклонения.
+
+    Returns:
+        bool: True, если цена закрытия находится в пределах заданного отклонения от линии тренда,
+              иначе False.
+
+    Examples:
+        >>> check_trendline_touch(100, 101, 0.02)
+        True
+        >>> check_trendline_touch(100, 105, 0.02)
+        False
+
+    Note:
+        - Функция предполагает, что deviation передается в десятичном формате (например, 0.05 для 5%).
+        - Функция симметрично проверяет отклонение как выше, так и ниже значения линии тренда.
+    """
+    lower_bound = trendline_value * (1 - deviation)
+    upper_bound = trendline_value * (1 + deviation)
+    return lower_bound <= price <= upper_bound
     
