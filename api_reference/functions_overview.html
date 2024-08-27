@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="ru" data-content_root="../" >
+<html lang="ru" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>2.1. Обзор функций &#8212; документация mplfinance 1.0</title>
+    <title>Обзор функций &#8212; документация mplfinance 1.0</title>
   
   
   
@@ -28,25 +29,25 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/documentation_options.js?v=9ca2116e"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/translations.js?v=9bfe3ffa"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/translations.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/functions_overview';</script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
-    <link rel="next" title="2.2. Документация" href="mplfinance_func1.html" />
-    <link rel="prev" title="2. mplf_line_trend API" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ru"/>
   </head>
@@ -143,15 +144,22 @@
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../introduction.html">
-    Введение
+  <a class="nav-link nav-internal" href="../installation.html">
+    Установка
   </a>
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="index.html">
     mplf_line_trend API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Примеры использования
   </a>
 </li>
 
@@ -240,7 +248,9 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
         
 
   
@@ -256,15 +266,22 @@ document.write(`
   <ul class="bd-navbar-elements navbar-nav">
     
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../introduction.html">
-    Введение
+  <a class="nav-link nav-internal" href="../installation.html">
+    Установка
   </a>
 </li>
 
 
-<li class="nav-item current active">
+<li class="nav-item ">
   <a class="nav-link nav-internal" href="index.html">
     mplf_line_trend API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutorials.html">
+    Примеры использования
   </a>
 </li>
 
@@ -310,19 +327,6 @@ document.write(`
     
   </div>
   
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-<nav class="bd-docs-nav bd-links"
-     aria-label="В этом разделе">
-  <p class="bd-links__title" role="heading" aria-level="1">В этом разделе</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2.1. Обзор функций</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mplfinance_func1.html">2.2. Документация</a></li>
-</ul>
-</div>
-</nav></div>
-    </div>
-  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -355,10 +359,7 @@ document.write(`
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link"><span class="section-number">2. </span>mplf_line_trend API</a></li>
-    
-    <li class="breadcrumb-item active" aria-current="page"><span...</li>
+    <li class="breadcrumb-item active" aria-current="page">Обзор функций</li>
   </ul>
 </nav>
 </div>
@@ -376,18 +377,18 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="functions-overview">
-<span id="id1"></span><h1><span class="section-number">2.1. </span>Обзор функций<a class="headerlink" href="#functions-overview" title="Ссылка на этот заголовок">#</a></h1>
+<span id="id1"></span><h1>Обзор функций<a class="headerlink" href="#functions-overview" title="Permalink to this heading">#</a></h1>
 <p>В этом разделе представлен краткий обзор основных функций, используемых в проекте.</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.extract_datetime_components" title="my_func.extract_datetime_components"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_datetime_components(df:</span> <span class="pre">pd.DataFrame)</span></code></a>: Преобразует столбец „timestamp“, извлекает компоненты даты и времени и устанавливает „timestamp“ в качестве индекса.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.set_plt_params" title="my_func.set_plt_params"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_plt_params(fontsize:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">9.0,</span> <span class="pre">linewidth:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1.0,</span> <span class="pre">figsize:</span> <span class="pre">tuple</span> <span class="pre">=</span> <span class="pre">(12.8,</span> <span class="pre">7.2))</span></code></a>: Устанавливает параметры для matplotlib.pyplot.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.plot_candlestick_with_lines" title="my_func.plot_candlestick_with_lines"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_candlestick_with_lines(df:</span> <span class="pre">pd.DataFrame,</span> <span class="pre">start_index:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">end_index:</span> <span class="pre">Optional[int]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">...)</span></code></a>: Отображает свечной график с дополнительными линиями.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.calculate_relative_difference" title="my_func.calculate_relative_difference"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_relative_difference(open:</span> <span class="pre">float,</span> <span class="pre">close:</span> <span class="pre">float,</span> <span class="pre">low:</span> <span class="pre">float)</span></code></a>: Вычисляет относительное изменение для актива на основе его цен открытия, закрытия и минимальной цены.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.linear_regression" title="my_func.linear_regression"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_regression(df:</span> <span class="pre">pd.DataFrame,</span> <span class="pre">start_index:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">...)</span></code></a>: Вычисляет значения линейной регрессии для заданного диапазона индексов DataFrame.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.linear_model" title="my_func.linear_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_model(x:</span> <span class="pre">Union[float,</span> <span class="pre">np.ndarray],</span> <span class="pre">k:</span> <span class="pre">float,</span> <span class="pre">b:</span> <span class="pre">float)</span></code></a>: Вычисляет значение „y“ для линейной функции на основе входных параметров.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.get_coefs" title="my_func.get_coefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_coefs(x0:</span> <span class="pre">float,</span> <span class="pre">x1:</span> <span class="pre">float,</span> <span class="pre">y0:</span> <span class="pre">float,</span> <span class="pre">y1:</span> <span class="pre">float)</span></code></a>: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.process_trendlines" title="my_func.process_trendlines"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_trendlines(trendline_dict:</span> <span class="pre">Dict[int,</span> <span class="pre">Dict[str,</span> <span class="pre">Tuple[int,</span> <span class="pre">int]]])</span></code></a>: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p></li>
-<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.check_trendline_touch" title="my_func.check_trendline_touch"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_trendline_touch(price:</span> <span class="pre">float,</span> <span class="pre">trendline_value:</span> <span class="pre">float,</span> <span class="pre">deviation:</span> <span class="pre">float)</span></code></a>: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.extract_datetime_components" title="my_func.extract_datetime_components"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_datetime_components</span></code></a>: Преобразует столбец „timestamp“, извлекает компоненты даты и времени и устанавливает „timestamp“ в качестве индекса.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.set_plt_params" title="my_func.set_plt_params"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_plt_params</span></code></a>: Устанавливает параметры для matplotlib.pyplot.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.plot_candlestick_with_lines" title="my_func.plot_candlestick_with_lines"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_candlestick_with_lines</span></code></a>: Отображает свечной график с дополнительными линиями.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.calculate_relative_difference" title="my_func.calculate_relative_difference"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_relative_difference</span></code></a>: Вычисляет относительное изменение для актива на основе его цен открытия, закрытия и минимальной цены.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.linear_regression" title="my_func.linear_regression"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_regression</span></code></a>: Вычисляет значения линейной регрессии для заданного диапазона индексов DataFrame.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.linear_model" title="my_func.linear_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_model</span></code></a>: Вычисляет значение „y“ для линейной функции на основе входных параметров.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.get_coefs" title="my_func.get_coefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_coefs</span></code></a>: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.process_trendlines" title="my_func.process_trendlines"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_trendlines</span></code></a>: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p></li>
+<li><p><a class="reference internal" href="mplfinance_func1.html#my_func.check_trendline_touch" title="my_func.check_trendline_touch"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_trendline_touch</span></code></a>: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p></li>
 </ul>
 <p>Подробное описание каждой функции вы найдете в разделе «<span class="xref std std-ref">api_reference/index:Вспомогательные функции</span>».</p>
 </section>
@@ -402,24 +403,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="index.html"
-       title="предыдущая страница">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">назад</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>mplf_line_trend API</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="mplfinance_func1.html"
-       title="следующая страница">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">вперёд</p>
-        <p class="prev-next-title"><span class="section-number">2.2. </span>Документация</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -495,7 +478,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Создано с помощью <a href=\"https://www.sphinx-doc.org/\">Sphinx</a> 7.4.7.
+    Создано с помощью <a href=\"https://www.sphinx-doc.org/\">Sphinx</a> 5.0.2.
     <br/>
   </p>
 </div>
