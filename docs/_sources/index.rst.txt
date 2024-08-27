@@ -23,8 +23,9 @@ Welcome to mplfinance's documentation!
    :hidden:
    :caption: Основные разделы:
 
-   introduction
+   installation
    api_reference/index
+   tutorials
 
 
 Indices and tables

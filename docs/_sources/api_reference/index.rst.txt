@@ -7,5 +7,4 @@ mplf_line_trend API
 .. toctree::
    :maxdepth: 3
 
-   functions_overview
    mplfinance_func1
