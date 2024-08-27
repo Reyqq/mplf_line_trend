@@ -20,3 +20,4 @@ mplf_line_trend API
    :members:
    :undoc-members:
    :show-inheritance:
+
