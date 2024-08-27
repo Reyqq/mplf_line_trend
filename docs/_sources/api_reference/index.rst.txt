@@ -14,7 +14,8 @@ mplf_line_trend API
 - :func:`get_coefs <my_func.get_coefs>`: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.
 - :func:`process_trendlines <my_func.process_trendlines>`: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.
 - :func:`check_trendline_touch <my_func.check_trendline_touch>`: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.
-
+- :func:`process_dataframe <my_func.process_dataframe>`: Обрабатывает DataFrame с финансовыми данными и строит трендовые линии.
+- :func:`check_point <my_func.check_point>`: Определяет минимальную цену за торговый день на основе индекса i.
 
 .. automodule:: my_func
    :members:

@@ -456,4 +456,374 @@ def check_trendline_touch(price: float, trendline_value: float, deviation: float
     lower_bound = trendline_value * (1 - deviation)
     upper_bound = trendline_value * (1 + deviation)
     return lower_bound <= price <= upper_bound
+
+
+
+
+def process_dataframe(
+    df: pd.DataFrame,
+    start_index: int = 0,
+    end_index: Optional[int] = None,
+    skip_points: int = 0,
+    touches: int = 1,
+    deviation: float = 0,
+    rel_diff: float = 0.00005
+) -> pd.DataFrame:
+    """
+    Обрабатывает DataFrame с финансовыми данными и строит трендовые линии.
+
+    Эта функция анализирует временной ряд финансовых данных, идентифицирует
+    значимые точки тренда и строит линии тренда на основе заданных параметров.
+
+    Args:
+        df (pd.DataFrame): DataFrame с финансовыми данными. Ожидается наличие
+                           колонок с ценами (например, 'Close', 'High', 'Low').
+        start_index (int): Индекс первой обрабатываемой строки. По умолчанию 0.
+        end_index (Optional[int]): Индекс последней обрабатываемой строки. 
+                                   None означает обработку до конца DataFrame.
+        skip_points (int): Количество точек для пропуска перед проверкой новой
+                           линии тренда. Помогает избежать ложных сигналов.
+        touches (int): Минимальное количество касаний цены линии тренда,
+                       необходимое для подтверждения тренда.
+        deviation (float): Допустимое абсолютное отклонение цены от линии тренда.
+                           Используется для учета рыночного шума.
+        rel_diff (float): Минимальная относительная разница цен для идентификации
+                          точки тренда. Помогает отфильтровать незначительные колебания.
+
+    Returns:
+        pd.DataFrame: Обработанный DataFrame с добавленными колонками для
+                      трендовых линий и их параметров.
+
+    Raises:
+        ValueError: Если входные параметры имеют недопустимые значения.
+
+    Note:
+        - Функция модифицирует входной DataFrame, добавляя новые колонки.
+        - Рекомендуется предварительно очистить данные от выбросов и пропусков.
+        - Для оптимальных результатов может потребоваться настройка параметров
+          под конкретный финансовый инструмент и таймфрейм.
+    """
+
+
+    # 1. Проверка типов данных
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("df должен быть pandas.DataFrame")
+
+    # 2. Обработка пропущенных значений
+    if df.isnull().values.any():
+        logging.warning("В DataFrame обнаружены пропущенные значения")
+        # df = df.dropna()   или df.fillna(method='ffill')
+
+    # 3. Проверка диапазона индексов
+    if start_index < 0 or (end_index is not None and end_index > len(df)):
+        raise ValueError("Неверно указаны индексы start_index или end_index")
+
+    # 4. Валидация параметров
+    if skip_points < 0 or touches < 1 or deviation < 0 or rel_diff <= 0:
+        raise ValueError("Один из параметров имеет недопустимое значение")
+
+
+    if end_index is None:
+        end_index = len(df)
+
+    trend_lines = [np.nan] * len(df.iloc[start_index:end_index])
+
+
+    result = []
+    current_points = []
+    historical_points = []
+    trendline_dict = {}
+
+
+    skp_points = 0
+    touch_count = 0
+
+    open_data = df['open']
+    close_data = df['close']
+    low_data = df['low']
+    high_data = df['high']
+
+
+
+    def check_point(i: int, close_data: List[float], open_data: List[float]) -> float:
+        """
+        Определяет минимальную цену за торговый день на основе индекса i.
+
+        Эта функция сравнивает цены открытия и закрытия для заданного индекса
+        и возвращает меньшую из них, что может быть использовано для анализа
+        дневного ценового движения или расчета потенциальных убытков.
+
+        Args:
+            i (int): Индекс для доступа к элементам в массивах close_data и open_data.
+            close_data (List[float]): Список цен закрытия.
+            open_data (List[float]): Список цен открытия.
+
+        Returns:
+            float: Минимальная цена за день:
+                  - Цена открытия, если цена закрытия больше или равна цене открытия.
+                  - Цена закрытия, если цена закрытия меньше цены открытия.
+
+        Raises:
+            IndexError: Если индекс i выходит за пределы списков close_data или open_data.
+            TypeError: Если i не является целым числом или если элементы close_data
+                      или open_data не являются числами с плавающей точкой.
+
+        Example:
+            >>> close_prices = [101.5, 102.0, 100.5]
+            >>> open_prices = [100.0, 102.5, 101.0]
+            >>> check_point(0, close_prices, open_prices)
+            100.0
+            >>> check_point(1, close_prices, open_prices)
+            102.0
+            >>> check_point(2, close_prices, open_prices)
+            100.5
+
+        Note:
+            - Функция предполагает, что списки close_data и open_data имеют одинаковую длину
+              и содержат корректные данные.
+            - Эта функция может быть полезна для анализа внутридневной волатильности
+              или для определения потенциальных уровней поддержки.
+        """
+        
+        if close_data[i] >= open_data[i]:
+            return open_data[i]
+        else:
+            return close_data[i]
+
+
+    for i in tqdm(range(start_index, end_index)):
+
+
+
+        if len(current_points) == 0:
+            result.append(np.nan)
+            relative_difference = calculate_relative_difference(open_data[i], close_data[i], low_data[i])
+            if relative_difference >= rel_diff:
+                historical_points.append((i, low_data[i]))
+                current_points.append((i, low_data[i]))
+
+
+
+        elif len(current_points) == 2:
+          x_curr = np.arange(current_points[0][0], i + 1)
+          y_curr = linear_model(x_curr, k=k, b=b)
+
+
+          if skp_points > skip_points:
+            relative_difference = calculate_relative_difference(open_data[i], close_data[i], low_data[i])
+            if relative_difference >= rel_diff:
+                historical_points.append((i, low_data[i]))
+                current_points.append((i, low_data[i]))
+                del current_points[0]
+
+
+                k1, b1 = get_coefs(current_points[0][0], current_points[1][0], current_points[0][1], current_points[1][1])
+                x = np.arange(current_points[0][0], current_points[1][0] + 1)
+                y = linear_model(x, k=k1, b=b1)
+                if k1 >= 0:
+
+                    for j in range(current_points[0][0], current_points[1][0] + 1):
+
+                        # if check_trendline_touch(y[j - current_points[0][0]], low_data[j], deviation):
+                        #     touch_count += 1
+
+                        if y[j - current_points[0][0]] > low_data[j]:
+                            touch_count += 1
+
+                        if touch_count >= touches :
+                            del current_points[0]
+                            result.append(y_curr[-1])
+                            trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+                            skp_points = 0
+                            touch_count = 0
+                            break
+
+                    else:
+                      for z in range(current_points[0][0], current_points[1][0] + 1):
+                        trend_lines[z - start_index] = round(y[z - current_points[0][0]], 2)
+                      skp_points = 0
+                      touch_count = 0
+                      k, b = get_coefs(current_points[0][0], current_points[1][0], current_points[0][1], current_points[1][1])
+                      trendline_dict[len(trendline_dict)] = {'p1': (str(df.index[current_points[0][0]]), round(y[0], 2)), 'p2': (str(df.index[current_points[1][0]]), round(y[-1], 2))}
+                      result.append((i, low_data[i]))
+                      continue
+                elif check_point(i) > y_curr[-1]:
+                    result.append(y_curr[-1])
+                    trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+                    del current_points[0]
+                    skp_points = 0
+                    continue
+                else:
+                  result.append(np.nan)
+                  del current_points[0]
+                  skp_points = 0
+                  continue
+
+            elif check_point(i) > y_curr[-1]:
+              result.append(y_curr[-1])
+              trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+              continue
+            else:
+              skp_points = 0
+              del current_points[0]
+              result.append(np.nan)
+              continue
+          elif check_point(i) > y_curr[-1]:
+              skp_points += 1
+              result.append(y_curr[-1])
+              trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+              skp_points += 1
+
+          else:
+            result.append(np.nan)
+            skp_points = 0
+            del current_points[0]
+
+
+
+
+        elif len(current_points) == 1 and result[-1] is not np.nan and len(historical_points) >= 2:
+          x_curr = np.arange(current_points[0][0], i + 1)
+          y_curr = linear_model(x_curr, k=k, b=b)
+
+          if skp_points > skip_points:
+            relative_difference = calculate_relative_difference(open_data[i], close_data[i], low_data[i])
+            if relative_difference >= rel_diff:
+                historical_points.append((i, low_data[i]))
+                current_points.append((i, low_data[i]))
+
+                k1, b1 = get_coefs(current_points[0][0], current_points[1][0], current_points[0][1], current_points[1][1])
+                x = np.arange(current_points[0][0], current_points[1][0] + 1)
+                y = linear_model(x, k=k1, b=b1)
+                if k1 >= 0:
+
+
+                    for j in range(current_points[0][0], current_points[1][0] + 1):
+
+                        # if check_trendline_touch(y[j - current_points[0][0]], low_data[j], deviation):
+                        #     touch_count += 1
+
+                        if y[j - current_points[0][0]] > low_data[j]:
+                            touch_count += 1
+
+                        if touch_count >= touches:
+                            result.append(y_curr[-1])
+                            trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+                            skp_points = 0
+                            del current_points[0]
+                            touch_count = 0
+                            break
+
+                    else:
+                      for z in range(current_points[0][0], current_points[1][0] + 1):
+                        trend_lines[z - start_index] = round(y[z - current_points[0][0]], 2)
+                      skp_points = 0
+                      touch_count = 0
+                      k, b = get_coefs(current_points[0][0], current_points[1][0], current_points[0][1], current_points[1][1])
+                      trendline_dict[len(trendline_dict)] = {'p1': (str(df.index[current_points[0][0]]), round(y[0], 2)), 'p2': (str(df.index[current_points[1][0]]), round(y[-1], 2))}
+                      result.append((i, low_data[i]))
+
+                elif check_point(i) > y_curr[-1]:
+                  result.append(y_curr[-1])
+                  trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+                  del current_points[0]
+                  skp_points = 0
+
+                else:
+                  del current_points[0]
+                  skp_points = 0
+                  result.append(np.nan)
+
+
+            elif check_point(i) > y_curr[-1]:
+              result.append(y_curr[-1])
+              trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+              continue
+
+            else:
+              result.append(np.nan)
+
+
+
+          elif check_point(i) > y_curr[-1]:
+            result.append(y_curr[-1])
+            trendline_dict[len(trendline_dict)] = {'p3': (str(df.index[i]), round(y_curr[-1], 2))}
+            skp_points += 1
+            continue
+
+          else:
+            result.append(np.nan)
+            skp_points += 1
+            continue
+
+
+
+
+
+        elif len(current_points) == 1:
+          if skp_points > skip_points:
+            relative_difference = calculate_relative_difference(open_data[i], close_data[i], low_data[i])
+            if relative_difference >= rel_diff:
+                historical_points.append((i, low_data[i]))
+                current_points.append((i, low_data[i]))
+
+                k1, b1 = get_coefs(current_points[0][0], current_points[1][0], current_points[0][1], current_points[1][1])
+                x = np.arange(current_points[0][0], current_points[1][0] + 1)
+                y = linear_model(x, k=k1, b=b1)
+                if k1 >= 0:
+
+
+                    for j in range(current_points[0][0], current_points[1][0] + 1):
+
+                        # if check_trendline_touch(y[j - current_points[0][0]], low_data[j], deviation):
+                        #     touch_count += 1
+
+                        if y[j - current_points[0][0]] > low_data[j]:
+                            touch_count += 1
+
+                        if touch_count >= touches:
+                            result.append(np.nan)
+                            skp_points = 0
+                            del current_points[0]
+                            touch_count = 0
+                            break
+
+                    else:
+                      for z in range(current_points[0][0], current_points[1][0] + 1):
+                        trend_lines[z - start_index] = round(y[z - current_points[0][0]], 2)
+                      skp_points = 0
+                      touch_count = 0
+                      k, b = get_coefs(current_points[0][0], current_points[1][0], current_points[0][1], current_points[1][1])
+                      trendline_dict[len(trendline_dict)] = {'p1': (str(df.index[current_points[0][0]]), round(y[0], 2)), 'p2': (str(df.index[current_points[1][0]]), round(y[-1], 2))}
+                      result.append((i, low_data[i]))
+
+                else:
+                  del current_points[0]
+                  skp_points = 0
+                  result.append(np.nan)
+
+
+            else:
+              result.append(np.nan)
+
+
+
+          else:
+              result.append(np.nan)
+              skp_points += 1
+
+
+
+    plot_candlestick_with_lines_final = plot_candlestick_with_lines(df=df, start_index=start_index, end_index=end_index, line_data=trend_lines,trendline_dict=trendline_dict)
+
+    return plot_candlestick_with_lines_final
+
+
+
+
+
+
+
+
+
     

@@ -398,6 +398,8 @@ document.write(`
 <li><p><a class="reference internal" href="#my_func.get_coefs" title="my_func.get_coefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_coefs</span></code></a>: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.</p></li>
 <li><p><a class="reference internal" href="#my_func.process_trendlines" title="my_func.process_trendlines"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_trendlines</span></code></a>: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p></li>
 <li><p><a class="reference internal" href="#my_func.check_trendline_touch" title="my_func.check_trendline_touch"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_trendline_touch</span></code></a>: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p></li>
+<li><p><a class="reference internal" href="#my_func.process_dataframe" title="my_func.process_dataframe"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_dataframe</span></code></a>: Обрабатывает DataFrame с финансовыми данными и строит трендовые линии.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">check_point</span></code>: Определяет минимальную цену за торговый день на основе индекса i.</p></li>
 </ul>
 <span class="target" id="module-my_func"></span><dl class="py function">
 <dt class="sig sig-object py" id="my_func.extract_datetime_components">
@@ -786,6 +788,55 @@ b = y0 - k * x0</p>
 <ul class="simple">
 <li><p>Функция предполагает, что deviation передается в десятичном формате (например, 0.05 для 5%).</p></li>
 <li><p>Функция симметрично проверяет отклонение как выше, так и ниже значения линии тренда.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.process_dataframe">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">process_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">touches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_diff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5e-05</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/my_func.html#process_dataframe"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.process_dataframe" title="Ссылка на это определение">#</a></dt>
+<dd><p>Обрабатывает DataFrame с финансовыми данными и строит трендовые линии.</p>
+<p>Эта функция анализирует временной ряд финансовых данных, идентифицирует
+значимые точки тренда и строит линии тренда на основе заданных параметров.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame с финансовыми данными. Ожидается наличие
+колонок с ценами (например, „Close“, „High“, „Low“).</p></li>
+<li><p><strong>start_index</strong> (<em>int</em>) – Индекс первой обрабатываемой строки. По умолчанию 0.</p></li>
+<li><p><strong>end_index</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – Индекс последней обрабатываемой строки.
+None означает обработку до конца DataFrame.</p></li>
+<li><p><strong>skip_points</strong> (<em>int</em>) – Количество точек для пропуска перед проверкой новой
+линии тренда. Помогает избежать ложных сигналов.</p></li>
+<li><p><strong>touches</strong> (<em>int</em>) – Минимальное количество касаний цены линии тренда,
+необходимое для подтверждения тренда.</p></li>
+<li><p><strong>deviation</strong> (<em>float</em>) – Допустимое абсолютное отклонение цены от линии тренда.
+Используется для учета рыночного шума.</p></li>
+<li><p><strong>rel_diff</strong> (<em>float</em>) – Минимальная относительная разница цен для идентификации
+точки тренда. Помогает отфильтровать незначительные колебания.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Обработанный DataFrame с добавленными колонками для</dt><dd><p>трендовых линий и их параметров.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Если входные параметры имеют недопустимые значения.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>Функция модифицирует входной DataFrame, добавляя новые колонки.</p></li>
+<li><p>Рекомендуется предварительно очистить данные от выбросов и пропусков.</p></li>
+<li><p>Для оптимальных результатов может потребоваться настройка параметров
+под конкретный финансовый инструмент и таймфрейм.</p></li>
 </ul>
 </div>
 </dd></dl>
