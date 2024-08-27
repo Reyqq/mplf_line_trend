@@ -48,7 +48,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'api_reference/index';</script>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
-    <link rel="next" title="2.1. Документация" href="mplfinance_func1.html" />
+    <link rel="next" title="4. Примеры использования" href="../tutorials.html" />
     <link rel="prev" title="1. Установка" href="../installation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="ru"/>
@@ -332,10 +332,7 @@ document.write(`
 <nav class="bd-docs-nav bd-links"
      aria-label="В этом разделе">
   <p class="bd-links__title" role="heading" aria-level="1">В этом разделе</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="mplfinance_func1.html">2.1. Документация</a></li>
-</ul>
-</div>
+  <div class="bd-toc-item navbar-nav"></div>
 </nav></div>
     </div>
   
@@ -391,11 +388,412 @@ document.write(`
   <section id="mplf-line-trend-api">
 <h1><span class="section-number">2. </span>mplf_line_trend API<a class="headerlink" href="#mplf-line-trend-api" title="Permalink to this heading">#</a></h1>
 <p>Этот раздел содержит подробную документацию по всем вспомогательным функциям, доступным в нашей библиотеке.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="mplfinance_func1.html">2.1. Документация</a></li>
+</section>
+<section id="id1">
+<h1><span class="section-number">3. </span>Документация<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>Этот раздел содержит подробное описание всех функций, реализованных в проекте.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#my_func.extract_datetime_components" title="my_func.extract_datetime_components"><code class="xref py py-func docutils literal notranslate"><span class="pre">extract_datetime_components</span></code></a>: Преобразует столбец „timestamp“, извлекает компоненты даты и времени и устанавливает „timestamp“ в качестве индекса.</p></li>
+<li><p><a class="reference internal" href="#my_func.set_plt_params" title="my_func.set_plt_params"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_plt_params</span></code></a>: Устанавливает параметры для matplotlib.pyplot.</p></li>
+<li><p><a class="reference internal" href="#my_func.plot_candlestick_with_lines" title="my_func.plot_candlestick_with_lines"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_candlestick_with_lines</span></code></a>: Отображает свечной график с дополнительными линиями.</p></li>
+<li><p><a class="reference internal" href="#my_func.calculate_relative_difference" title="my_func.calculate_relative_difference"><code class="xref py py-func docutils literal notranslate"><span class="pre">calculate_relative_difference</span></code></a>: Вычисляет относительное изменение для актива на основе его цен открытия, закрытия и минимальной цены.</p></li>
+<li><p><a class="reference internal" href="#my_func.linear_regression" title="my_func.linear_regression"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_regression</span></code></a>: Вычисляет значения линейной регрессии для заданного диапазона индексов DataFrame.</p></li>
+<li><p><a class="reference internal" href="#my_func.linear_model" title="my_func.linear_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">linear_model</span></code></a>: Вычисляет значение „y“ для линейной функции на основе входных параметров.</p></li>
+<li><p><a class="reference internal" href="#my_func.get_coefs" title="my_func.get_coefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_coefs</span></code></a>: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.</p></li>
+<li><p><a class="reference internal" href="#my_func.process_trendlines" title="my_func.process_trendlines"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_trendlines</span></code></a>: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p></li>
+<li><p><a class="reference internal" href="#my_func.check_trendline_touch" title="my_func.check_trendline_touch"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_trendline_touch</span></code></a>: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p></li>
+</ul>
+<span class="target" id="module-my_func"></span><dl class="py function">
+<dt class="sig sig-object py" id="my_func.extract_datetime_components">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">extract_datetime_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/my_func.html#extract_datetime_components"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.extract_datetime_components" title="Ссылка на это определение">#</a></dt>
+<dd><p>Преобразует столбец „timestamp“, извлекает компоненты даты и времени и устанавливает „timestamp“ в качестве индекса.</p>
+<p>Эта функция выполняет следующие операции:
+1. Преобразует столбец „timestamp“ в формат datetime.
+2. Извлекает дату и время из „timestamp“ в отдельные столбцы.
+3. Устанавливает „timestamp“ в качестве индекса датафрейма.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – Исходный датафрейм с столбцом „timestamp“.</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Обновленный датафрейм с новыми столбцами „date“ и „time“,</dt><dd><p>и „timestamp“ в качестве индекса.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – Если в датафрейме отсутствует столбец „timestamp“.</p>
+</dd>
+</dl>
+<p class="rubric">Пример</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2023-08-01 10:30:00&#39;</span><span class="p">,</span> <span class="s1">&#39;2023-08-01 11:45:00&#39;</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.set_plt_params">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">set_plt_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">9.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(12.8,</span> <span class="pre">7.2)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/my_func.html#set_plt_params"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.set_plt_params" title="Ссылка на это определение">#</a></dt>
+<dd><p>Устанавливает параметры для matplotlib.pyplot.</p>
+<p>Эта функция настраивает различные параметры для графиков matplotlib, включая
+цветовую схему, размеры шрифтов, стили линий и другие визуальные элементы.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fontsize</strong> (<em>float</em><em>, </em><em>optional</em>) – Размер шрифта для меток осей и легенды. По умолчанию 9.0.</p></li>
+<li><p><strong>linewidth</strong> (<em>float</em><em>, </em><em>optional</em>) – Толщина линий на графиках. По умолчанию 1.0.</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em><em>, </em><em>optional</em>) – Размер фигуры (ширина, высота) в дюймах. По умолчанию (12.8, 7.2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Пример</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_plt_params</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Эта функция изменяет глобальные настройки matplotlib.pyplot.
+Все последующие графики будут использовать эти настройки,
+если они не будут изменены явно.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.plot_candlestick_with_lines">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">plot_candlestick_with_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chart_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_color</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'#b2b5be'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Series</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_processor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trendline_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/my_func.html#plot_candlestick_with_lines"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.plot_candlestick_with_lines" title="Ссылка на это определение">#</a></dt>
+<dd><p>Отображает свечной график с дополнительными линиями.</p>
+<p>Эта функция создает свечной график на основе предоставленных данных и добавляет
+дополнительные линии тренда и другие визуальные элементы.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Датафрейм с данными для графика. Должен содержать столбцы
+„Open“, „High“, „Low“, „Close“ для построения свечей.</p></li>
+<li><p><strong>start_index</strong> (<em>int</em><em>, </em><em>optional</em>) – Начальный индекс данных в датафрейме для отображения
+на графике. По умолчанию 0.</p></li>
+<li><p><strong>end_index</strong> (<em>int</em><em>, </em><em>optional</em>) – Конечный индекс данных в датафрейме для отображения
+на графике. По умолчанию None (до конца датафрейма).</p></li>
+<li><p><strong>chart_title</strong> (<em>str</em><em>, </em><em>optional</em>) – Заголовок графика. По умолчанию None.</p></li>
+<li><p><strong>ylabel</strong> (<em>str</em><em>, </em><em>optional</em>) – Название оси Y. По умолчанию None.</p></li>
+<li><p><strong>xlabel</strong> (<em>str</em><em>, </em><em>optional</em>) – Название оси X. По умолчанию None.</p></li>
+<li><p><strong>title_fontsize</strong> (<em>int</em><em>, </em><em>optional</em>) – Размер шрифта заголовка. По умолчанию 18.</p></li>
+<li><p><strong>label_color</strong> (<em>str</em><em>, </em><em>optional</em>) – Цвет текста названий осей и заголовка.
+По умолчанию «#b2b5be».</p></li>
+<li><p><strong>line_data</strong> (<em>pd.Series</em><em>, </em><em>optional</em>) – Данные для отображения дополнительной линии
+на графике. По умолчанию None.</p></li>
+<li><p><strong>line_processor</strong> (<em>Callable</em><em>[</em><em>[</em><em>dict</em><em>]</em><em>, </em><em>list</em><em>]</em><em>, </em><em>optional</em>) – Функция для обработки линий.
+По умолчанию None.</p></li>
+<li><p><strong>trendline_dict</strong> (<em>dict</em><em>, </em><em>optional</em>) – Словарь с данными для линий, который будет
+обработан функцией line_processor. По умолчанию None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – Если trendline_dict не определен или не найдено подходящих линий.</p>
+</dd>
+<dt class="field-odd">Результат<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Функция отображает график, но не возвращает значение.</p>
+</dd>
+<dt class="field-even">Тип результата<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p class="rubric">Пример</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s1">&#39;Open&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;High&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;Low&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+<span class="gp">... </span>    <span class="s1">&#39;Close&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
+<span class="gp">... </span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plot_candlestick_with_lines</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">chart_title</span><span class="o">=</span><span class="s2">&quot;Пример графика&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Эта функция использует библиотеки matplotlib и mplfinance для создания графика.
+Убедитесь, что эти библиотеки установлены перед использованием функции.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.calculate_relative_difference">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">calculate_relative_difference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">open</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">low</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/my_func.html#calculate_relative_difference"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.calculate_relative_difference" title="Ссылка на это определение">#</a></dt>
+<dd><p>Вычисляет относительное изменение для актива на основе его цен открытия, закрытия и минимальной цены.</p>
+<p>Эта функция рассчитывает относительное изменение цены актива в зависимости от того,
+закрылась ли цена выше или ниже цены открытия. Если цена закрытия выше цены открытия,
+используется формула (open - low) / open. В противном случае используется
+формула (close - low) / close.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>open</strong> (<em>float</em>) – Цена открытия актива.</p></li>
+<li><p><strong>close</strong> (<em>float</em>) – Цена закрытия актива.</p></li>
+<li><p><strong>low</strong> (<em>float</em>) – Минимальная цена актива за период.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Относительное изменение цены актива.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_relative_difference</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">105.0</span><span class="p">,</span> <span class="mf">98.0</span><span class="p">)</span>
+<span class="go">0.02</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">calculate_relative_difference</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">95.0</span><span class="p">,</span> <span class="mf">93.0</span><span class="p">)</span>
+<span class="go">0.021052631578947367</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Эта функция предполагает, что все входные значения являются положительными числами.
+Отрицательные значения или значения, равные нулю, могут привести к неопределенному поведению.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.linear_regression">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">linear_regression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/my_func.html#linear_regression"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.linear_regression" title="Ссылка на это определение">#</a></dt>
+<dd><p>Вычисляет значения линейной регрессии для заданного диапазона индексов DataFrame.</p>
+<p>Эта функция рассчитывает линейную регрессию на основе заданных начальной и конечной точек.
+Она вычисляет угловой коэффициент и свободный член линейной функции, а затем
+применяет эту функцию ко всем индексам в заданном диапазоне.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – DataFrame, содержащий данные для анализа.</p></li>
+<li><p><strong>start_index</strong> (<em>int</em><em>, </em><em>optional</em>) – Начальный индекс диапазона. По умолчанию 0.</p></li>
+<li><p><strong>end_index</strong> (<em>int</em><em>, </em><em>optional</em>) – Конечный индекс диапазона. Если None, используется последний индекс DataFrame.</p></li>
+<li><p><strong>y0</strong> (<em>float</em><em>, </em><em>optional</em>) – Значение y в начальной точке. По умолчанию 0.</p></li>
+<li><p><strong>y1</strong> (<em>float</em><em>, </em><em>optional</em>) – Значение y в конечной точке. По умолчанию 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Кортеж, содержащий два элемента:</dt><dd><ul class="simple">
+<li><p>numpy.ndarray: Массив значений y, рассчитанных по линейной функции.</p></li>
+<li><p>float: Угловой коэффициент k линейной функции.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – Если end_index меньше start_index.</p></li>
+<li><p><strong>IndexError</strong> – Если указанные индексы находятся за пределами DataFrame.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="n">linear_regression</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">start_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_index</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y1</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Угловой коэффициент: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">Угловой коэффициент: 1.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Значения y: </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">Значения y: [ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Эта функция предполагает, что индексы DataFrame являются числовыми и
+последовательными. Если это не так, результаты могут быть неожиданными.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.linear_model">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">linear_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/my_func.html#linear_model"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.linear_model" title="Ссылка на это определение">#</a></dt>
+<dd><p>Вычисляет значение „y“ для линейной функции на основе входных параметров.</p>
+<p>Эта функция реализует линейную модель вида y = kx + b, где k - угловой коэффициент,
+а b - свободный член. Функция может работать как с отдельными числами, так и с
+массивами numpy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>np.ndarray</em><em>]</em>) – Независимая переменная или массив независимых переменных.</p></li>
+<li><p><strong>k</strong> (<em>float</em>) – Угловой коэффициент линейной функции (наклон прямой).</p></li>
+<li><p><strong>b</strong> (<em>float</em>) – Свободный член линейной функции (точка пересечения с осью Y).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p>Значение(я) зависимой переменной y, вычисленное по формуле
+линейной функции. Тип возвращаемого значения соответствует типу входного параметра x.</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Union[float, np.ndarray]</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">linear_model</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">linear_model</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">array([3, 5, 7])</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Эта функция использует векторизованные операции numpy, поэтому она эффективна
+для больших массивов данных.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.get_coefs">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">get_coefs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/my_func.html#get_coefs"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.get_coefs" title="Ссылка на это определение">#</a></dt>
+<dd><p>Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.</p>
+<p>Эта функция рассчитывает параметры линейной функции вида y = kx + b
+на основе двух заданных точек (x0, y0) и (x1, y1). Функция использует
+формулы:
+k = (y1 - y0) / (x1 - x0)
+b = y0 - k * x0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x0</strong> (<em>float</em>) – Значение x первой точки.</p></li>
+<li><p><strong>x1</strong> (<em>float</em>) – Значение x второй точки.</p></li>
+<li><p><strong>y0</strong> (<em>float</em>) – Значение y первой точки.</p></li>
+<li><p><strong>y1</strong> (<em>float</em>) – Значение y второй точки.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Кортеж, содержащий два элемента:</dt><dd><ul class="simple">
+<li><p>float: Угловой коэффициент (k) линейной функции.</p></li>
+<li><p>float: Смещение (b) линейной функции.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple[float, float]</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ZeroDivisionError</strong> – Если x1 равно x0, что приводит к делению на ноль.</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">get_coefs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">k = 2.0, b = 1.0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">get_coefs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">, b = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="go">k = 3.0, b = -1.0</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<p>Эта функция предполагает, что входные точки различны по x (x0 != x1).
+В случае x0 = x1, будет вызвано исключение ZeroDivisionError.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.process_trendlines">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">process_trendlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trendline_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/my_func.html#process_trendlines"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.process_trendlines" title="Ссылка на это определение">#</a></dt>
+<dd><p>Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p>
+<p>Функция анализирует словарь <cite>trendline_dict</cite>, находит ключи „p2“ и „p3“, и создаёт список кортежей с парами координат.
+Эти пары координат представляют собой начальную и конечную точки трендовых линий.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>trendline_dict</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em><em>]</em>) – Словарь, где ключами являются целые числа,
+а значениями - словари с ключами „p1“, „p2“, „p3“ и значениями в виде кортежей координат (x, y).</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Список кортежей, где каждый кортеж содержит две пары координат (x, y),</dt><dd><p>соответствующие начальной и конечной точкам трендовых линий.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[Tuple[int, int], Tuple[int, int]]]</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trendline_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;p2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
+<span class="gp">... </span>    <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p3&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
+<span class="gp">... </span>    <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;p2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
+<span class="gp">... </span>    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p3&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)}</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">process_trendlines</span><span class="p">(</span><span class="n">trendline_dict</span><span class="p">)</span>
+<span class="go">[((1, 1), (2, 2)), ((3, 3), (4, 4))]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>Функция предполагает, что ключи в словаре <cite>trendline_dict</cite> начинаются с 0 и идут последовательно.</p></li>
+<li><p>Функция ищет „p2“ в предыдущем элементе и „p3“ в текущем элементе для формирования пары координат.</p></li>
 </ul>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.check_trendline_touch">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">check_trendline_touch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trendline_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/my_func.html#check_trendline_touch"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.check_trendline_touch" title="Ссылка на это определение">#</a></dt>
+<dd><p>Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p>
+<p>Эта функция определяет, попадает ли заданная цена в диапазон, образованный значением линии тренда
+плюс-минус указанное процентное отклонение.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>price</strong> (<em>float</em>) – Цена закрытия свечи.</p></li>
+<li><p><strong>trendline_value</strong> (<em>float</em>) – Значение линии тренда в момент закрытия свечи.</p></li>
+<li><p><strong>deviation</strong> (<em>float</em>) – Допустимое отклонение от линии тренда в процентах (в десятичном формате).
+Например, 0.05 для 5% отклонения.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>True, если цена закрытия находится в пределах заданного отклонения от линии тренда,</dt><dd><p>иначе False.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_trendline_touch</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_trendline_touch</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>Функция предполагает, что deviation передается в десятичном формате (например, 0.05 для 5%).</p></li>
+<li><p>Функция симметрично проверяет отклонение как выше, так и ниже значения линии тренда.</p></li>
+</ul>
+</div>
+</dd></dl>
+
 </section>
 
 
@@ -418,11 +816,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="mplfinance_func1.html"
+       href="../tutorials.html"
        title="следующая страница">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">вперёд</p>
-        <p class="prev-next-title"><span class="section-number">2.1. </span>Документация</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Примеры использования</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -435,6 +833,20 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> На этой странице
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. mplf_line_trend API</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3. Документация</a></li>
+</ul>
+
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 
