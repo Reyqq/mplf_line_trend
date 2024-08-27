@@ -19,7 +19,6 @@ Welcome to mplfinance's documentation!
 .. toctree::
    :maxdepth: 4
    :titlesonly:
-   :numbered: -1
    :hidden:
    :caption: Основные разделы:
 
