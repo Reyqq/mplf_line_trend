@@ -150,7 +150,7 @@
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    Справочник API
+    Вспомогательные функции
   </a>
 </li>
 
@@ -263,7 +263,7 @@ document.write(`
 
 <li class="nav-item current active">
   <a class="nav-link nav-internal" href="index.html">
-    Справочник API
+    Вспомогательные функции
   </a>
 </li>
 
@@ -355,7 +355,7 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link"><span class="section-number">2. </span>Справочник API</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link"><span class="section-number">2. </span>Вспомогательные функции</a></li>
     
     <li class="breadcrumb-item active" aria-current="page"><span...</li>
   </ul>
@@ -683,6 +683,90 @@ b = y0 - k * x0</p>
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.process_trendlines">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">process_trendlines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trendline_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/my_func.html#process_trendlines"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.process_trendlines" title="Link to this definition">#</a></dt>
+<dd><p>Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p>
+<p>Функция анализирует словарь <cite>trendline_dict</cite>, находит ключи „p2“ и „p3“, и создаёт список кортежей с парами координат.
+Эти пары координат представляют собой начальную и конечную точки трендовых линий.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>trendline_dict</strong> (<em>Dict</em><em>[</em><em>int</em><em>, </em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em><em>]</em><em>]</em>) – Словарь, где ключами являются целые числа,
+а значениями - словари с ключами „p1“, „p2“, „p3“ и значениями в виде кортежей координат (x, y).</p>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Список кортежей, где каждый кортеж содержит две пары координат (x, y),</dt><dd><p>соответствующие начальной и конечной точкам трендовых линий.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[Tuple[int, int], Tuple[int, int]]]</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">trendline_dict</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;p2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)},</span>
+<span class="gp">... </span>    <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p3&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)},</span>
+<span class="gp">... </span>    <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p1&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;p2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)},</span>
+<span class="gp">... </span>    <span class="mi">3</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;p3&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)}</span>
+<span class="gp">... </span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">process_trendlines</span><span class="p">(</span><span class="n">trendline_dict</span><span class="p">)</span>
+<span class="go">[((1, 1), (2, 2)), ((3, 3), (4, 4))]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>Функция предполагает, что ключи в словаре <cite>trendline_dict</cite> начинаются с 0 и идут последовательно.</p></li>
+<li><p>Функция ищет „p2“ в предыдущем элементе и „p3“ в текущем элементе для формирования пары координат.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.check_trendline_touch">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">check_trendline_touch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trendline_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/my_func.html#check_trendline_touch"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.check_trendline_touch" title="Link to this definition">#</a></dt>
+<dd><p>Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p>
+<p>Эта функция определяет, попадает ли заданная цена в диапазон, образованный значением линии тренда
+плюс-минус указанное процентное отклонение.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>price</strong> (<em>float</em>) – Цена закрытия свечи.</p></li>
+<li><p><strong>trendline_value</strong> (<em>float</em>) – Значение линии тренда в момент закрытия свечи.</p></li>
+<li><p><strong>deviation</strong> (<em>float</em>) – Допустимое отклонение от линии тренда в процентах (в десятичном формате).
+Например, 0.05 для 5% отклонения.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>True, если цена закрытия находится в пределах заданного отклонения от линии тренда,</dt><dd><p>иначе False.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p class="rubric">Примеры</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_trendline_touch</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_trendline_touch</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>Функция предполагает, что deviation передается в десятичном формате (например, 0.05 для 5%).</p></li>
+<li><p>Функция симметрично проверяет отклонение как выше, так и ниже значения линии тренда.</p></li>
+</ul>
+</div>
+</dd></dl>
+
 <p>Этот раздел содержит подробное описание всех функций, реализованных в проекте.</p>
 </section>
 
@@ -730,6 +814,8 @@ b = y0 - k * x0</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my_func.linear_regression"><code class="docutils literal notranslate"><span class="pre">linear_regression()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my_func.linear_model"><code class="docutils literal notranslate"><span class="pre">linear_model()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my_func.get_coefs"><code class="docutils literal notranslate"><span class="pre">get_coefs()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my_func.process_trendlines"><code class="docutils literal notranslate"><span class="pre">process_trendlines()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my_func.check_trendline_touch"><code class="docutils literal notranslate"><span class="pre">check_trendline_touch()</span></code></a></li>
 </ul>
   </nav></div>
 

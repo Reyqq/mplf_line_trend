@@ -14,5 +14,7 @@
 - :func:`linear_regression(df: pd.DataFrame, start_index: int = 0, ...) <my_func.linear_regression>`: Вычисляет значения линейной регрессии для заданного диапазона индексов DataFrame.
 - :func:`linear_model(x: Union[float, np.ndarray], k: float, b: float) <my_func.linear_model>`: Вычисляет значение 'y' для линейной функции на основе входных параметров.
 - :func:`get_coefs(x0: float, x1: float, y0: float, y1: float) <my_func.get_coefs>`: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.
+- :func:`process_trendlines(trendline_dict: Dict[int, Dict[str, Tuple[int, int]]]) <my_func.process_trendlines>`: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.
+- :func:`check_trendline_touch(price: float, trendline_value: float, deviation: float) <my_func.check_trendline_touch>`: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.
 
-Подробное описание каждой функции вы найдете в разделе ":ref:`api_reference/index:Справочник API`".
+Подробное описание каждой функции вы найдете в разделе ":ref:`api_reference/index:Вспомогательные функции`".
