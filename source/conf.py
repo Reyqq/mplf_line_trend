@@ -87,6 +87,16 @@ html_theme_options = {
     "collapse_navigation": False,
 }
 
+# Отключает нумерацию разделов
+numfig = False
+
+# Показывает только заголовки в оглавлении
+html_show_sourcelink = False
+html_use_index = True
+html_copy_source = False
+
+# Убирает нумерацию в содержании
+toc_object_entries_show_parents = 'hide'
 
 
 html_context = {
