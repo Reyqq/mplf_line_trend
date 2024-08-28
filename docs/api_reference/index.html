@@ -398,8 +398,8 @@ document.write(`
 <li><p><a class="reference internal" href="#my_func.get_coefs" title="my_func.get_coefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_coefs</span></code></a>: Вычисляет угловой коэффициент (k) и смещение (b) линейной функции.</p></li>
 <li><p><a class="reference internal" href="#my_func.process_trendlines" title="my_func.process_trendlines"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_trendlines</span></code></a>: Обрабатывает словарь с трендовыми линиями и извлекает пары координат для последующего использования.</p></li>
 <li><p><a class="reference internal" href="#my_func.check_trendline_touch" title="my_func.check_trendline_touch"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_trendline_touch</span></code></a>: Проверяет, находится ли цена в пределах заданного процентного отклонения от значения линии тренда.</p></li>
+<li><p><a class="reference internal" href="#my_func.check_point" title="my_func.check_point"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_point</span></code></a>: Определяет минимальную цену за торговый день на основе индекса i.</p></li>
 <li><p><a class="reference internal" href="#my_func.process_dataframe" title="my_func.process_dataframe"><code class="xref py py-func docutils literal notranslate"><span class="pre">process_dataframe</span></code></a>: Обрабатывает DataFrame с финансовыми данными и строит трендовые линии.</p></li>
-<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">check_point</span></code>: Определяет минимальную цену за торговый день на основе индекса i.</p></li>
 </ul>
 <span class="target" id="module-my_func"></span><dl class="py function">
 <dt class="sig sig-object py" id="my_func.extract_datetime_components">
@@ -788,6 +788,64 @@ b = y0 - k * x0</p>
 <ul class="simple">
 <li><p>Функция предполагает, что deviation передается в десятичном формате (например, 0.05 для 5%).</p></li>
 <li><p>Функция симметрично проверяет отклонение как выше, так и ниже значения линии тренда.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="my_func.check_point">
+<span class="sig-prename descclassname"><span class="pre">my_func.</span></span><span class="sig-name descname"><span class="pre">check_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/my_func.html#check_point"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#my_func.check_point" title="Ссылка на это определение">#</a></dt>
+<dd><p>Определяет минимальную цену за торговый день на основе индекса i.</p>
+<p>Эта функция сравнивает цены открытия и закрытия для заданного индекса
+и возвращает меньшую из них, что может быть использовано для анализа
+дневного ценового движения или расчета потенциальных убытков.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> (<em>int</em>) – Индекс для доступа к элементам в массивах close_data и open_data.</p></li>
+<li><p><strong>close_data</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – Список цен закрытия.</p></li>
+<li><p><strong>open_data</strong> (<em>List</em><em>[</em><em>float</em><em>]</em>) – Список цен открытия.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Результат<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Минимальная цена за день:</dt><dd><ul class="simple">
+<li><p>Цена открытия, если цена закрытия больше или равна цене открытия.</p></li>
+<li><p>Цена закрытия, если цена закрытия меньше цены открытия.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Исключение<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>IndexError</strong> – Если индекс i выходит за пределы списков close_data или open_data.</p></li>
+<li><p><strong>TypeError</strong> – Если i не является целым числом или если элементы close_data
+    или open_data не являются числами с плавающей точкой.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Пример</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">close_prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">101.5</span><span class="p">,</span> <span class="mf">102.0</span><span class="p">,</span> <span class="mf">100.5</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">open_prices</span> <span class="o">=</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">102.5</span><span class="p">,</span> <span class="mf">101.0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">close_prices</span><span class="p">,</span> <span class="n">open_prices</span><span class="p">)</span>
+<span class="go">100.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">close_prices</span><span class="p">,</span> <span class="n">open_prices</span><span class="p">)</span>
+<span class="go">102.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">close_prices</span><span class="p">,</span> <span class="n">open_prices</span><span class="p">)</span>
+<span class="go">100.5</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Примечание</p>
+<ul class="simple">
+<li><p>Функция предполагает, что списки close_data и open_data имеют одинаковую длину
+и содержат корректные данные.</p></li>
+<li><p>Эта функция может быть полезна для анализа внутридневной волатильности
+или для определения потенциальных уровней поддержки.</p></li>
 </ul>
 </div>
 </dd></dl>

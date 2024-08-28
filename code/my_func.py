@@ -459,6 +459,52 @@ def check_trendline_touch(price: float, trendline_value: float, deviation: float
 
 
 
+def check_point(i: int, close_data: List[float], open_data: List[float]) -> float:
+    """
+    Определяет минимальную цену за торговый день на основе индекса i.
+
+    Эта функция сравнивает цены открытия и закрытия для заданного индекса
+    и возвращает меньшую из них, что может быть использовано для анализа
+    дневного ценового движения или расчета потенциальных убытков.
+
+    Args:
+        i (int): Индекс для доступа к элементам в массивах close_data и open_data.
+        close_data (List[float]): Список цен закрытия.
+        open_data (List[float]): Список цен открытия.
+
+    Returns:
+        float: Минимальная цена за день:
+              - Цена открытия, если цена закрытия больше или равна цене открытия.
+              - Цена закрытия, если цена закрытия меньше цены открытия.
+
+    Raises:
+        IndexError: Если индекс i выходит за пределы списков close_data или open_data.
+        TypeError: Если i не является целым числом или если элементы close_data
+                  или open_data не являются числами с плавающей точкой.
+
+    Example:
+        >>> close_prices = [101.5, 102.0, 100.5]
+        >>> open_prices = [100.0, 102.5, 101.0]
+        >>> check_point(0, close_prices, open_prices)
+        100.0
+        >>> check_point(1, close_prices, open_prices)
+        102.0
+        >>> check_point(2, close_prices, open_prices)
+        100.5
+
+    Note:
+        - Функция предполагает, что списки close_data и open_data имеют одинаковую длину
+          и содержат корректные данные.
+        - Эта функция может быть полезна для анализа внутридневной волатильности
+          или для определения потенциальных уровней поддержки.
+    """
+    
+    if close_data[i] >= open_data[i]:
+        return open_data[i]
+    else:
+        return close_data[i]
+
+
 
 def process_dataframe(
     df: pd.DataFrame,
@@ -542,53 +588,6 @@ def process_dataframe(
     close_data = df['close']
     low_data = df['low']
     high_data = df['high']
-
-
-
-    def check_point(i: int, close_data: List[float], open_data: List[float]) -> float:
-        """
-        Определяет минимальную цену за торговый день на основе индекса i.
-
-        Эта функция сравнивает цены открытия и закрытия для заданного индекса
-        и возвращает меньшую из них, что может быть использовано для анализа
-        дневного ценового движения или расчета потенциальных убытков.
-
-        Args:
-            i (int): Индекс для доступа к элементам в массивах close_data и open_data.
-            close_data (List[float]): Список цен закрытия.
-            open_data (List[float]): Список цен открытия.
-
-        Returns:
-            float: Минимальная цена за день:
-                  - Цена открытия, если цена закрытия больше или равна цене открытия.
-                  - Цена закрытия, если цена закрытия меньше цены открытия.
-
-        Raises:
-            IndexError: Если индекс i выходит за пределы списков close_data или open_data.
-            TypeError: Если i не является целым числом или если элементы close_data
-                      или open_data не являются числами с плавающей точкой.
-
-        Example:
-            >>> close_prices = [101.5, 102.0, 100.5]
-            >>> open_prices = [100.0, 102.5, 101.0]
-            >>> check_point(0, close_prices, open_prices)
-            100.0
-            >>> check_point(1, close_prices, open_prices)
-            102.0
-            >>> check_point(2, close_prices, open_prices)
-            100.5
-
-        Note:
-            - Функция предполагает, что списки close_data и open_data имеют одинаковую длину
-              и содержат корректные данные.
-            - Эта функция может быть полезна для анализа внутридневной волатильности
-              или для определения потенциальных уровней поддержки.
-        """
-        
-        if close_data[i] >= open_data[i]:
-            return open_data[i]
-        else:
-            return close_data[i]
 
 
     for i in tqdm(range(start_index, end_index)):
