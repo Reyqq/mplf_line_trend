@@ -24,33 +24,6 @@
 
 Полная документация доступна на: https://reyqq.github.io/mplf_line_trend/
 
-## Быстрый старт
-
-Вот простой пример использования mplf_line_trend:
-
-.. code-block:: python
-
-   import pandas as pd
-   from mplf_line_trend import process_dataframe, extract_datetime_components, set_plt_params
-
-   # Загрузка данных
-   df = pd.read_parquet('path/to/your/data.parquet')
-
-   # Подготовка данных
-   df = extract_datetime_components(df)
-   set_plt_params()
-
-   # Анализ и визуализация трендов
-   processed_df = process_dataframe(
-        df=df,
-        start_index=0,
-        end_index=300,
-        skip_points=2,
-        touches=1,
-        deviation=0.000000000003,
-        rel_diff=0.00005
-    )
-
 
 ## Вклад в проект
 
