@@ -836,6 +836,52 @@ document.write(`
 
 
 
+<div class="viewcode-block" id="check_point"><a class="viewcode-back" href="../api_reference/index.html#my_func.check_point">[документация]</a><span class="k">def</span> <span class="nf">check_point</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">close_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">open_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Определяет минимальную цену за торговый день на основе индекса i.</span>
+
+<span class="sd">    Эта функция сравнивает цены открытия и закрытия для заданного индекса</span>
+<span class="sd">    и возвращает меньшую из них, что может быть использовано для анализа</span>
+<span class="sd">    дневного ценового движения или расчета потенциальных убытков.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        i (int): Индекс для доступа к элементам в массивах close_data и open_data.</span>
+<span class="sd">        close_data (List[float]): Список цен закрытия.</span>
+<span class="sd">        open_data (List[float]): Список цен открытия.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: Минимальная цена за день:</span>
+<span class="sd">              - Цена открытия, если цена закрытия больше или равна цене открытия.</span>
+<span class="sd">              - Цена закрытия, если цена закрытия меньше цены открытия.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        IndexError: Если индекс i выходит за пределы списков close_data или open_data.</span>
+<span class="sd">        TypeError: Если i не является целым числом или если элементы close_data</span>
+<span class="sd">                  или open_data не являются числами с плавающей точкой.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; close_prices = [101.5, 102.0, 100.5]</span>
+<span class="sd">        &gt;&gt;&gt; open_prices = [100.0, 102.5, 101.0]</span>
+<span class="sd">        &gt;&gt;&gt; check_point(0, close_prices, open_prices)</span>
+<span class="sd">        100.0</span>
+<span class="sd">        &gt;&gt;&gt; check_point(1, close_prices, open_prices)</span>
+<span class="sd">        102.0</span>
+<span class="sd">        &gt;&gt;&gt; check_point(2, close_prices, open_prices)</span>
+<span class="sd">        100.5</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        - Функция предполагает, что списки close_data и open_data имеют одинаковую длину</span>
+<span class="sd">          и содержат корректные данные.</span>
+<span class="sd">        - Эта функция может быть полезна для анализа внутридневной волатильности</span>
+<span class="sd">          или для определения потенциальных уровней поддержки.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">close_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">open_data</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">open_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">close_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
+
+
 
 <div class="viewcode-block" id="process_dataframe"><a class="viewcode-back" href="../api_reference/index.html#my_func.process_dataframe">[документация]</a><span class="k">def</span> <span class="nf">process_dataframe</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
@@ -919,53 +965,6 @@ document.write(`
     <span class="n">close_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;close&#39;</span><span class="p">]</span>
     <span class="n">low_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">]</span>
     <span class="n">high_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">]</span>
-
-
-
-    <span class="k">def</span> <span class="nf">check_point</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">close_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">open_data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Определяет минимальную цену за торговый день на основе индекса i.</span>
-
-<span class="sd">        Эта функция сравнивает цены открытия и закрытия для заданного индекса</span>
-<span class="sd">        и возвращает меньшую из них, что может быть использовано для анализа</span>
-<span class="sd">        дневного ценового движения или расчета потенциальных убытков.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            i (int): Индекс для доступа к элементам в массивах close_data и open_data.</span>
-<span class="sd">            close_data (List[float]): Список цен закрытия.</span>
-<span class="sd">            open_data (List[float]): Список цен открытия.</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            float: Минимальная цена за день:</span>
-<span class="sd">                  - Цена открытия, если цена закрытия больше или равна цене открытия.</span>
-<span class="sd">                  - Цена закрытия, если цена закрытия меньше цены открытия.</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            IndexError: Если индекс i выходит за пределы списков close_data или open_data.</span>
-<span class="sd">            TypeError: Если i не является целым числом или если элементы close_data</span>
-<span class="sd">                      или open_data не являются числами с плавающей точкой.</span>
-
-<span class="sd">        Example:</span>
-<span class="sd">            &gt;&gt;&gt; close_prices = [101.5, 102.0, 100.5]</span>
-<span class="sd">            &gt;&gt;&gt; open_prices = [100.0, 102.5, 101.0]</span>
-<span class="sd">            &gt;&gt;&gt; check_point(0, close_prices, open_prices)</span>
-<span class="sd">            100.0</span>
-<span class="sd">            &gt;&gt;&gt; check_point(1, close_prices, open_prices)</span>
-<span class="sd">            102.0</span>
-<span class="sd">            &gt;&gt;&gt; check_point(2, close_prices, open_prices)</span>
-<span class="sd">            100.5</span>
-
-<span class="sd">        Note:</span>
-<span class="sd">            - Функция предполагает, что списки close_data и open_data имеют одинаковую длину</span>
-<span class="sd">              и содержат корректные данные.</span>
-<span class="sd">            - Эта функция может быть полезна для анализа внутридневной волатильности</span>
-<span class="sd">              или для определения потенциальных уровней поддержки.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        
-        <span class="k">if</span> <span class="n">close_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">open_data</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="n">open_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">close_data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">start_index</span><span class="p">,</span> <span class="n">end_index</span><span class="p">)):</span>
