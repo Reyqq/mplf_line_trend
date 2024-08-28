@@ -16,8 +16,7 @@
 
 Установите mplf_line_trend с помощью pip:
 
-.. code-block:: python
-   pip install mplf-line-trend
+**!pip install mplf-line-trend**
 
 
 ## Документация
