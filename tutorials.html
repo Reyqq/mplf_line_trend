@@ -383,13 +383,75 @@ document.write(`
                   
   <section id="tutorials">
 <span id="id1"></span><h1>Примеры использования<a class="headerlink" href="#tutorials" title="Ссылка на этот заголовок">#</a></h1>
-<p>В разработке!</p>
-<figure class="align-left" id="id2">
-<a class="reference internal image-reference" href="_images/grafic.png"><img alt="Vlados" src="_images/grafic.png" style="width: 737.6px; height: 407.6px;" /></a>
+<p>В этом разделе представлены примеры использования основных функций библиотеки.</p>
+<section id="id2">
+<h2>Загрузка и подготовка данных<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">#</a></h2>
+<p>Сначала необходимо загрузить данные и подготовить их к обработке:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">your_library</span> <span class="kn">import</span> <span class="n">extract_datetime_components</span><span class="p">,</span> <span class="n">set_plt_params</span><span class="p">,</span> <span class="n">process_dataframe</span>
+
+<span class="c1"># Загрузка данных</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;path/to/your/data.parquet&#39;</span><span class="p">)</span>
+
+<span class="c1"># Переименование столбцов</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;low_futures&#39;</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;high_futures&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span> <span class="s1">&#39;close_futures&#39;</span><span class="p">:</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="s1">&#39;open_futures&#39;</span><span class="p">:</span> <span class="s1">&#39;open&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Извлечение компонентов даты и времени</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">extract_datetime_components</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Настройка параметров для визуализации</span>
+<span class="n">set_plt_params</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h2>Обработка данных<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">#</a></h2>
+<p>После подготовки данных можно приступить к их обработке:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Вызов основной функции обработки</span>
+<span class="n">processed_df</span> <span class="o">=</span> <span class="n">process_dataframe</span><span class="p">(</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">start_index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">end_index</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
+    <span class="n">skip_points</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">touches</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">deviation</span><span class="o">=</span><span class="mf">0.000000000003</span><span class="p">,</span>
+    <span class="n">rel_diff</span><span class="o">=</span><span class="mf">0.00005</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<section id="id4">
+<h3>Параметры функции:<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">#</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start_index</span></code>: Индекс начала обработки (0 означает с начала DataFrame).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end_index</span></code>: Индекс конца обработки (300 означает первые 300 строк).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skip_points</span></code>: Количество точек для пропуска при проверке тренда (2 в данном примере).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touches</span></code>: Минимальное количество касаний для подтверждения тренда (1 в данном примере).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deviation</span></code>: Допустимое отклонение от линии тренда.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rel_diff</span></code>: Минимальная относительная разница для определения точки тренда.</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>Результаты<a class="headerlink" href="#id5" title="Ссылка на этот заголовок">#</a></h2>
+<p>После выполнения функции <code class="docutils literal notranslate"><span class="pre">process_dataframe</span></code> генерируется график, который визуализирует результаты анализа:</p>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/grafic.png"><img alt="График результатов анализа" src="_images/grafic.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Пример итога работы функции.</span><a class="headerlink" href="#id2" title="Ссылка на это изображение">#</a></p>
+<p><span class="caption-text">Рис. 1: Визуализация результатов анализа трендов</span><a class="headerlink" href="#id7" title="Ссылка на это изображение">#</a></p>
 </figcaption>
 </figure>
+<p>На этом графике представлены исходные данные и выявленные тренды. Линии тренда показывают
+направление движения цены на различных участках графика.</p>
+<section id="id6">
+<h3>Интерпретация результатов<a class="headerlink" href="#id6" title="Ссылка на этот заголовок">#</a></h3>
+<ul class="simple">
+<li><p>Восходящие линии тренда указывают на периоды роста цены.</p></li>
+<li><p>Нисходящие линии тренда указывают на периоды снижения цены.</p></li>
+<li><p>Точки касания линий тренда могут рассматриваться как потенциальные уровни поддержки или сопротивления.</p></li>
+</ul>
+<p>Для более детального анализа результатов рекомендуется изучить дополнительные выходные данные функции <code class="docutils literal notranslate"><span class="pre">process_dataframe</span></code>.</p>
+</section>
+</section>
 </section>
 
 
@@ -420,6 +482,26 @@ document.write(`
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> На этой странице
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Загрузка и подготовка данных</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Обработка данных</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Параметры функции:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Результаты</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Интерпретация результатов</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 
